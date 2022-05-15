@@ -1,8 +1,14 @@
 import React from 'react';
 import tripsData from '../tripsData';
+import { useParams, Navigate } from 'react-router-dom';
 
 function TripDetail() {
-  const trip = tripsData[0];
+  const { tripSlug } = useParams();
+  const trip = tripsData.find((e) => e.slug == tripSlug);
+  if (trip == undefined) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="modal-dialog modal-xl">
       <div className="modal-content">
